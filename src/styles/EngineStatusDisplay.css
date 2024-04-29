@@ -1,0 +1,36 @@
+.status-display {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+  }
+  
+  .status-item {
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .status-item.good {
+    background-color: #eaffea;
+    color: #2c662d;
+  }
+  
+  .status-item.warning {
+    background-color: #fff3e6;
+    color: #8a2c0d;
+  }
+  
+  .part-name {
+    font-weight: bold;
+  }
+  
+  .part-status {
+    padding: 2px 5px;
+    border-radius: 10px;
+    text-transform: capitalize;
+  }
+  

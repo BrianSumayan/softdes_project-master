@@ -1,0 +1,111 @@
+/* src/App.css */
+
+.app-container {
+  text-align: center;
+  background-color: #303030; /* Dark background for the app */
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  background-color: #0c0c0c;
+  color: #fff;
+  border-bottom: #424242 solid 1px;
+}
+.headerContainer .header {
+  font-weight: 600;
+  font-size: 2.1rem;
+}
+
+.img-logo {
+  margin-left: 570px;
+  transform: rotate(90deg);
+  height: 160px;
+}
+
+.App-header {
+  color: #61dafb; /* Light blue color for the header */
+  font-size: 24px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 1200px; /* Adjust based on your preference */
+  margin-top: -50px; /* Adjust if necessary to position content up or down */
+}
+
+.car-diagram-container {
+  padding: 20px; /* Padding around the car diagram */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.car-border {
+  position: absolute;
+  top: 0;
+}
+
+.status-and-controls {
+  background: #333; /* Dark panel for status and controls */
+  padding: 20px;
+  border-radius: 10px;
+  flex-basis: 40%; /* Adjust the width of the status panel */
+  box-sizing: border-box;
+}
+
+.status-indicators {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.start-button {
+  background-color: #ffffff; /* Light blue color for the START button */
+  color: #000000; /* Dark text color for contrast */
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 42px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.start-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.recommendation {
+  background: #1c1e22; /* Dark background for the recommendation box */
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px;
+  margin-top: 20px;
+  display: none; /* Initially hidden */
+}
+
+.recommendation.visible {
+  display: block; /* Display recommendation when visible */
+}
+
+.status-and-recommendation {
+  background-color: #0c0c0c;
+  padding: 60px;
+  width: 40%;
+  height: 100%;
+  border-radius: 20px;
+}
