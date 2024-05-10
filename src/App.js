@@ -1,46 +1,68 @@
-// src/App.js
 import React, { useState } from "react";
 import axios from "axios";
-import CarDiagram from "./components/CarDiagram"; // Make sure this component is set up properly
-import StatusIndicators from "./components/StatusIndicators"; // New component for status indicators
-import "./App.css"; // Update your styles accordingly
+import CarDiagram from "./components/CarDiagram";
+import StatusIndicators from "./components/StatusIndicators";
+import RecommendationModal from "./components/RecommendationModal";
+import "./App.css"; // Make sure this import points to where you define the button styles
 import carImage from "./assets/car.png";
-import Form from "./components/Form";
-axios.defaults.withCredentials = true;
+
 function App() {
   const [engineStatus, setEngineStatus] = useState({
-    alternator: "warning",
+    alternator: "good",
     waterPump: "good",
     tensionerBearing: "good",
     belt: "good",
     radiatorFanMotor: "good",
   });
   const [isScanning, setIsScanning] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState(null);
+  const [detectionMessage, setDetectionMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [currentFault, setCurrentFault] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isFileValid, setIsFileValid] = useState(false);
 
   const handleStartScan = async () => {
+    if (!isFileValid) return; // Prevent scan if no valid file is selected
+
     setIsScanning(true);
-    // You should replace the below URL with the endpoint of your API that initiates the scanning
+    setEngineStatus({
+      alternator: "good",
+      waterPump: "good",
+      tensionerBearing: "good",
+      belt: "good",
+      radiatorFanMotor: "good",
+    });
+    setDetectionMessage('');
+    setShowModal(false);
+    setCurrentFault('');
     try {
-      const response = await axios.get("http://localhost:5000/api/start-scan");
-      setAnalysisResult(response.data);
-      updateEngineStatus(response.data.anomalies);
+      const response = await axios.get("http://192.168.1.15:5000/api/start-scan");
+      if (response.data.message === "Anomaly Detected!") {
+        setDetectionMessage(response.data.message);
+        const faultKey = Object.keys(response.data.faults).find(key => response.data.faults[key] === "warning");
+        setCurrentFault(faultKey);
+        setEngineStatus(response.data.faults);
+        setShowModal(true);
+      } else {
+        setDetectionMessage(response.data.message);
+      }
     } catch (error) {
       console.error("There was an error processing the scan", error);
-      // Handle error appropriately
+      setDetectionMessage('Error processing scan, please try again.');
     }
     setIsScanning(false);
   };
 
-  // This function would update the engine status based on the analysis results
-  const updateEngineStatus = (anomalies) => {
-    // Implement logic based on the structure of your anomalies data
-    // For example:
-    const newStatus = { ...engineStatus };
-    anomalies.forEach((anomaly) => {
-      newStatus[anomaly.part] = anomaly.status;
-    });
-    setEngineStatus(newStatus);
+  const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.startsWith('audio/')) {
+      setSelectedFile(file);
+      setIsFileValid(true);
+    } else {
+      setSelectedFile(null);
+      setIsFileValid(false);
+      alert('Please select a valid audio file.');
+    }
   };
 
   return (
@@ -49,31 +71,33 @@ function App() {
         <img src={carImage} className="img-logo" alt="Car Diagram" />
         <div className="header">TEAM 4</div>
       </div>
-      <div>
-        <Form />
-      </div>
       <div className="app-container">
         <div className="main-content">
           <CarDiagram isScanning={isScanning} />
           <div className="status-and-recommendation">
             <StatusIndicators status={engineStatus} />
-            {analysisResult && (
-              <div className="recommendation-panel">
-                <h2>RECOMMENDATION</h2>
-                {/* Render recommendation based on the analysisResult */}
-                <p>{analysisResult.recommendation}</p>
+            <div className="recommendation-panel">
+              <h2>SCAN RESULT</h2>
+              <p>{detectionMessage}</p>
+              <button className="button start-button" onClick={handleStartScan} disabled={!isFileValid || isScanning}>
+                {isScanning ? "SCANNING..." : "START SCAN"}
+              </button>
+              <div className="file-upload-container">
+                <label htmlFor="file-input" className="file-input-label">
+                  Input Sound File      
+                </label>
+                <input id="file-input" type="file" onChange={handleFileSelect} className="file-input" />
+                <button className="file-input-button" onClick={() => document.getElementById('file-input').click()}>
+                  Choose from the file
+                </button>
               </div>
-            )}
-            <button
-              className="start-button"
-              onClick={handleStartScan}
-              disabled={isScanning}
-            >
-              {isScanning ? "SCANNING" : "START"}
-            </button>
+            </div>
           </div>
         </div>
       </div>
+      {showModal && currentFault && (
+        <RecommendationModal isOpen={showModal} fault={currentFault} onClose={() => setShowModal(false)} />
+      )}
     </div>
   );
 }

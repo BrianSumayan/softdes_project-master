@@ -1,0 +1,39 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75); /* Slightly darker to enhance focus on modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* Ensure it's on top of other content */
+}
+
+.modal-content {
+  background: #333; /* Dark background for the modal */
+  color: #fff; /* Light text for contrast */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners for a softer look */
+  width: 90%; /* Responsive width */
+  max-width: 600px; /* Maximum width */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow for 3D effect */
+  text-align: center; /* Center-align the text */
+}
+
+.modal-close-btn {
+  background-color: #444; /* Darker background for the button to stand out */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px; /* Space from the content */
+  transition: background-color 0.3s;
+}
+
+.modal-close-btn:hover {
+  background-color: #555; /* Slightly lighter on hover for interactive effect */
+}

@@ -109,3 +109,35 @@
   height: 100%;
   border-radius: 20px;
 }
+
+.file-upload-container {
+  color: white;
+  padding: 15px;
+  margin-top: 20px; /* Add space above the container */
+  border-radius: 15px;
+  text-align: center;
+  width: auto;
+}
+
+.file-input-label {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.file-input {
+  display: none; /* Hide the default input */
+}
+.file-input-button {
+  background-color: #333; /* Dark gray */
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-input-button:hover {
+  background-color: #444; /* Lighter gray for hover */
+}
+

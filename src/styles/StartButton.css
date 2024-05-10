@@ -1,16 +1,15 @@
 /* src/styles/StartButton.css */
 .start-button {
-    background-color: #222;
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    /* Additional button styling... */
-  }
-  
-  .start-button:hover {
-    /* Hover effect */
-  }
-  
+  background-color: #222;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.start-button:hover {
+  background-color: #333; /* Slightly lighter black for hover effect */
+}
