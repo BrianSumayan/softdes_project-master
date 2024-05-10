@@ -141,3 +141,18 @@
   background-color: #444; /* Lighter gray for hover */
 }
 
+.recommendation-button {
+  background-color: #444; /* Darker grey, adjust as needed */
+  color: #fff; /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  margin-top: 10px; /* Additional spacing from the content above if needed */
+}
+
+.recommendation-button:hover {
+  background-color: #555; /* Slightly lighter on hover */
+}

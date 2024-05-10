@@ -3,7 +3,7 @@ import axios from "axios";
 import CarDiagram from "./components/CarDiagram";
 import StatusIndicators from "./components/StatusIndicators";
 import RecommendationModal from "./components/RecommendationModal";
-import "./App.css"; // Make sure this import points to where you define the button styles
+import "./App.css";
 import carImage from "./assets/car.png";
 
 function App() {
@@ -33,16 +33,15 @@ function App() {
       radiatorFanMotor: "good",
     });
     setDetectionMessage('');
-    setShowModal(false);
+    setShowModal(false); // Ensure modal doesn't show automatically
     setCurrentFault('');
     try {
-      const response = await axios.get("http://192.168.1.15:5000/api/start-scan");
+      const response = await axios.get("http://192.168.0.104:5000/api/start-scan");
       if (response.data.message === "Anomaly Detected!") {
         setDetectionMessage(response.data.message);
         const faultKey = Object.keys(response.data.faults).find(key => response.data.faults[key] === "warning");
         setCurrentFault(faultKey);
         setEngineStatus(response.data.faults);
-        setShowModal(true);
       } else {
         setDetectionMessage(response.data.message);
       }
@@ -65,6 +64,14 @@ function App() {
     }
   };
 
+  const handleOpenRecommendations = () => {
+    if (currentFault) {
+      setShowModal(true);
+    } else {
+      alert("No faults detected or scan not yet performed.");
+    }
+  };
+
   return (
     <div className="App">
       <div className="headerContainer">
@@ -84,13 +91,18 @@ function App() {
               </button>
               <div className="file-upload-container">
                 <label htmlFor="file-input" className="file-input-label">
-                  Input Sound File      
+                  Input Sound File
                 </label>
                 <input id="file-input" type="file" onChange={handleFileSelect} className="file-input" />
                 <button className="file-input-button" onClick={() => document.getElementById('file-input').click()}>
                   Choose from the file
                 </button>
               </div>
+              {detectionMessage === "Anomaly Detected!" && (
+                <button className="recommendation-button" onClick={handleOpenRecommendations}>
+                  Show Recommendations
+                </button>
+              )}
             </div>
           </div>
         </div>
