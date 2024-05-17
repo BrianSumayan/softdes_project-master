@@ -1,15 +1,16 @@
 /* src/App.css */
 
+body {
+  background-color: #303030;
+}
+
 .app-container {
   text-align: center;
-  background-color: #303030; /* Dark background for the app */
   color: white;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  margin: 50px 0;
 }
 
 .headerContainer {
@@ -20,13 +21,14 @@
   color: #fff;
   border-bottom: #424242 solid 1px;
 }
+
 .headerContainer .header {
   font-weight: 600;
   font-size: 2.1rem;
 }
 
 .img-logo {
-  margin-left: 570px;
+  margin-left: 70px;
   transform: rotate(90deg);
   height: 160px;
 }
@@ -43,21 +45,28 @@
 .main-content {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 20px;
   width: 100%;
-  max-width: 1200px; /* Adjust based on your preference */
-  margin-top: -50px; /* Adjust if necessary to position content up or down */
+  max-width: 1000px;
 }
 
 .car-diagram-container {
   padding: 20px; /* Padding around the car diagram */
   box-sizing: border-box;
   text-align: center;
+  position: relative;
+  width: 250px;
+  height: 470px;
+  background-color: #1c1c1c;
+  border-radius: 20px;
 }
 
 .car-border {
   position: absolute;
   top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .status-and-controls {
@@ -71,6 +80,16 @@
 .status-indicators {
   text-align: left;
   margin-bottom: 20px;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.indicator span {
+  margin-left: 10px;
 }
 
 .start-button {
@@ -127,6 +146,7 @@
 .file-input {
   display: none; /* Hide the default input */
 }
+
 .file-input-button {
   background-color: #333; /* Dark gray */
   color: white;
@@ -155,4 +175,29 @@
 
 .recommendation-button:hover {
   background-color: #555; /* Slightly lighter on hover */
+}
+
+@media screen and (max-width: 560px) {
+  .img-logo {
+    margin-left: 45px;
+    height: 120px;
+  }
+
+  .headerContainer .header {
+    font-size: 1rem;
+  }
+
+  .headerContainer {
+    gap: 40px;
+  }
+  .main-content {
+    flex-direction: column;
+  }
+  .status-and-recommendation {
+    width: 65%;
+  }
+  .app-container {
+    margin-top: 50px;
+    margin-bottom: 10px;
+  }
 }
