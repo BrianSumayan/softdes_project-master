@@ -15,9 +15,9 @@ function App() {
     radiatorFanMotor: "good",
   });
   const [isScanning, setIsScanning] = useState(false);
-  const [detectionMessage, setDetectionMessage] = useState('');
+  const [detectionMessage, setDetectionMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [currentFault, setCurrentFault] = useState('');
+  const [currentFault, setCurrentFault] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [isFileValid, setIsFileValid] = useState(false);
 
@@ -32,14 +32,18 @@ function App() {
       belt: "good",
       radiatorFanMotor: "good",
     });
-    setDetectionMessage('');
+    setDetectionMessage("");
     setShowModal(false); // Ensure modal doesn't show automatically
-    setCurrentFault('');
+    setCurrentFault("");
     try {
-      const response = await axios.get("http://192.168.0.104:5000/api/start-scan");
+      const response = await axios.get(
+        "http://192.168.1.52:5000/api/start-scan"
+      );
       if (response.data.message === "Anomaly Detected!") {
         setDetectionMessage(response.data.message);
-        const faultKey = Object.keys(response.data.faults).find(key => response.data.faults[key] === "warning");
+        const faultKey = Object.keys(response.data.faults).find(
+          (key) => response.data.faults[key] === "warning"
+        );
         setCurrentFault(faultKey);
         setEngineStatus(response.data.faults);
       } else {
@@ -47,20 +51,20 @@ function App() {
       }
     } catch (error) {
       console.error("There was an error processing the scan", error);
-      setDetectionMessage('Error processing scan, please try again.');
+      setDetectionMessage("Error processing scan, please try again.");
     }
     setIsScanning(false);
   };
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
-    if (file && file.type.startsWith('audio/')) {
+    if (file && file.type.startsWith("audio/")) {
       setSelectedFile(file);
       setIsFileValid(true);
     } else {
       setSelectedFile(null);
       setIsFileValid(false);
-      alert('Please select a valid audio file.');
+      alert("Please select a valid audio file.");
     }
   };
 
@@ -86,20 +90,35 @@ function App() {
             <div className="recommendation-panel">
               <h2>SCAN RESULT</h2>
               <p>{detectionMessage}</p>
-              <button className="button start-button" onClick={handleStartScan} disabled={!isFileValid || isScanning}>
+              <button
+                className="button start-button"
+                onClick={handleStartScan}
+                disabled={!isFileValid || isScanning}
+              >
                 {isScanning ? "SCANNING..." : "START SCAN"}
               </button>
               <div className="file-upload-container">
                 <label htmlFor="file-input" className="file-input-label">
                   Input Sound File
                 </label>
-                <input id="file-input" type="file" onChange={handleFileSelect} className="file-input" />
-                <button className="file-input-button" onClick={() => document.getElementById('file-input').click()}>
+                <input
+                  id="file-input"
+                  type="file"
+                  onChange={handleFileSelect}
+                  className="file-input"
+                />
+                <button
+                  className="file-input-button"
+                  onClick={() => document.getElementById("file-input").click()}
+                >
                   Choose from the file
                 </button>
               </div>
               {detectionMessage === "Anomaly Detected!" && (
-                <button className="recommendation-button" onClick={handleOpenRecommendations}>
+                <button
+                  className="recommendation-button"
+                  onClick={handleOpenRecommendations}
+                >
                   Show Recommendations
                 </button>
               )}
@@ -108,7 +127,11 @@ function App() {
         </div>
       </div>
       {showModal && currentFault && (
-        <RecommendationModal isOpen={showModal} fault={currentFault} onClose={() => setShowModal(false)} />
+        <RecommendationModal
+          isOpen={showModal}
+          fault={currentFault}
+          onClose={() => setShowModal(false)}
+        />
       )}
     </div>
   );
