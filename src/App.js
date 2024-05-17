@@ -76,7 +76,7 @@ function App() {
     <div className="App">
       <div className="headerContainer">
         <img src={carImage} className="img-logo" alt="Car Diagram" />
-        <div className="header">TEAM 4</div>
+        <div className="header">Fault Finder Pro</div>
       </div>
       <div className="app-container">
         <div className="main-content">
