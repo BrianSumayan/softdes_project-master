@@ -1,9 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, redirect, url_for, send_from_directory
 from flask_cors import CORS
 import numpy as np
 import time
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 CORS(app)
 
 def predict_anomaly():
@@ -21,6 +22,10 @@ def determine_fault():
     faults[selected_fault] = "warning"
     return faults
 
+@app.route('/')
+def home():
+    return send_from_directory(app.static_folder, 'index.html')
+
 @app.route('/api/start-scan', methods=['GET'])
 def check_anomaly():
     time.sleep(np.random.uniform(1, 2))  # Introduce a small delay
@@ -31,5 +36,9 @@ def check_anomaly():
     else:
         return jsonify({"message": "No Anomaly Detected, Engine is good!"})
 
+@app.errorhandler(404)
+def not_found(e):
+    return send_from_directory(app.static_folder, 'index.html')
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=10000)
