@@ -22,7 +22,7 @@ function App() {
   const [isFileValid, setIsFileValid] = useState(false);
 
   const handleStartScan = async () => {
-    if (!isFileValid) return; // Prevent scan if no valid file is selected
+    if (!isFileValid || !selectedFile) return; // Prevent scan if no valid file is selected
 
     setIsScanning(true);
     setEngineStatus({
