@@ -36,9 +36,7 @@ function App() {
     setShowModal(false); // Ensure modal doesn't show automatically
     setCurrentFault("");
     try {
-      const response = await axios.get(
-        "http://192.168.1.52:5000/api/start-scan"
-      );
+      const response = await axios.get("/api/start-scan");
       if (response.data.message === "Anomaly Detected!") {
         setDetectionMessage(response.data.message);
         const faultKey = Object.keys(response.data.faults).find(
