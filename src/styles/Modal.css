@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&display=swap");
 
 .modal-overlay {
   position: fixed;
@@ -7,7 +7,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(18, 18, 18, 0.85); /* Deeper, darker backdrop for contrast */
+  background-color: rgba(
+    18,
+    18,
+    18,
+    0.85
+  ); /* Deeper, darker backdrop for contrast */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,20 +20,24 @@
 }
 
 .modal-content {
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 100%); /* Subtle white gradient for glass effect */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.2) 100%
+  ); /* Subtle white gradient for glass effect */
   backdrop-filter: blur(10px); /* Creating the glassmorphism effect */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for a lifted glass effect */
   color: #fff;
   padding: 40px;
   border-radius: 20px; /* Enhanced rounded corners for a soft, modern look */
-  width: 100%;
-  max-width: 600px;
+  width: 90%;
+  max-width: 250px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); /* Deep shadows for more depth */
   text-align: center;
   position: relative;
-  font-family: 'Playfair Display', serif; /* Elegant serif font for headings */
+  font-family: "Playfair Display", serif; /* Elegant serif font for headings */
   transition: transform 0.5s ease-out, box-shadow 0.3s ease; /* Smoother transitions */
-  text-shadow: 2px 2px 10px rgba(0,0,0,0.9); /* Enhancing text contrast */
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.9); /* Enhancing text contrast */
 }
 
 .modal-close-btn {
@@ -44,7 +53,7 @@
   cursor: pointer;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
-  font-family: 'Roboto', sans-serif; /* Keeping sans-serif for readability */
+  font-family: "Roboto", sans-serif; /* Keeping sans-serif for readability */
 }
 
 .modal-close-btn:hover {
